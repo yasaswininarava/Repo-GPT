@@ -119,8 +119,10 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 Copy-Item .env.example .env
-streamlit run app.py
+.\run.ps1
 ```
+
+`run.ps1` starts the app and opens Google Chrome. Use that command instead of `streamlit run app.py` when you want Chrome to open by itself.
 
 `Set-ExecutionPolicy` applies only to that PowerShell window. It lets the activate script run.
 
