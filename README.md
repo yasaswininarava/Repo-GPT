@@ -126,7 +126,7 @@ Copy-Item .env.example .env
 
 `Set-ExecutionPolicy` applies only to that PowerShell window. It lets the activate script run.
 
-The first **Load repository** downloads `all-MiniLM-L6-v2` (about 90 MB) from Hugging Face. Later loads of the same commit reuse the saved index. Embedding uses the CPU. You do not need an NVIDIA GPU or CUDA. `sentence-transformers` installs the normal CPU build of PyTorch from PyPI.
+The first **Load repository** downloads `all-MiniLM-L6-v2` (about 90 MB) from Hugging Face. Later loads of the same commit reuse the saved index. Embedding uses ONNX Runtime on the CPU. You do not need PyTorch, an NVIDIA GPU, or CUDA.
 
 Leave the virtual environment with:
 

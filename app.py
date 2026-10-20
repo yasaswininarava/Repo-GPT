@@ -280,10 +280,15 @@ def _load_from_form(repository_url: str, *, refresh: bool) -> None:
                 previous_commit=previous.get("commit"),
             )
         except AppError as exc:
-            status.update(label="Could not load the repository", state="error")
-            st.error(str(exc))
-            return
-        status.update(label="Repository ready", state="complete")
+            status.update(label="Could not load the repository", state="error", expanded=False)
+            load_error = str(exc)
+        else:
+            status.update(label="Repository ready", state="complete")
+            load_error = None
+
+    if load_error:
+        st.error(load_error)
+        return
 
     new_identity = loaded.identity
     old_identity = previous.get("identity")
