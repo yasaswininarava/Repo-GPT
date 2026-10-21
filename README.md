@@ -1,4 +1,3 @@
-# Chat with GitHub
 
 Ask questions about a public GitHub repository. The app downloads the default branch, splits the text into small pieces, and searches those pieces on your computer. Gemini then writes an answer from the pieces that search found.
 
