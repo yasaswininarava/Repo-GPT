@@ -53,7 +53,7 @@ footer {
 .block-container {
   max-width: 1180px;
   padding-top: 1.6rem;
-  padding-bottom: 7rem;
+  padding-bottom: 2.4rem;
 }
 .masthead {
   display: flex;
@@ -170,6 +170,16 @@ div[data-testid="stTextInput"] input {
   border-color: #d9d0c4;
   background: #fffdfb;
 }
+div[data-testid="stChatInput"] {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-top: 0.85rem;
+  background: transparent;
+}
 </style>
 """
 
@@ -232,7 +242,7 @@ def main() -> None:
   <ol>
     <li>Paste a public GitHub URL.</li>
     <li>Click Load repository and wait for the index.</li>
-    <li>Ask a question in the box at the bottom of the page.</li>
+    <li>Ask a question in the box in this conversation panel.</li>
   </ol>
 </div>
                     """,
@@ -242,10 +252,9 @@ def main() -> None:
                 st.caption("Load a repository before asking a question.")
             for message in st.session_state.messages:
                 _show_message(message)
-
-    question = st.chat_input("Ask about the loaded repository")
-    if question:
-        _handle_question(question, index)
+            question = st.chat_input("Ask about the loaded repository")
+            if question:
+                _handle_question(question, index)
 
 
 @st.cache_resource(show_spinner="Loading the local embedding model on CPU...")
@@ -391,8 +400,7 @@ def _append_exchange(question: str, answer: str, **extra) -> None:
 
 
 def _show_message(message: dict) -> None:
-    avatar = "✎" if message["role"] == "user" else "◇"
-    with st.chat_message(message["role"], avatar=avatar):
+    with st.chat_message(message["role"]):
         st.markdown(message["content"])
         if message["role"] != "assistant":
             return
